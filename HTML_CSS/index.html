@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress to Shopify Excel Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <h1>Generate Shopify Excel from WordPress Data</h1>
+    
+    <textarea id="wordpressData" rows="10" cols="80" placeholder="Paste your WordPress JSON product data here..."></textarea><br>
+    
+    <button onclick="generateShopifyExcel()">Generate Shopify Excel</button>
+
+    <script>
+        // Function to convert WordPress JSON to Shopify Excel format
+        function generateShopifyExcel() {
+            // Get the input data from the textarea
+            const wordpressData = document.getElementById("wordpressData").value;
+            let wpProducts;
+
+            try {
+                wpProducts = JSON.parse(wordpressData);  // Parse the WordPress JSON data
+            } catch (error) {
+                alert("Invalid JSON format!");
+                return;
+            }
+
+            // Create an array for the Shopify data
+            const shopifyData = [];
+
+            // Add header row for Shopify
+            const headers = [
+                "Kit_ItemID", "Title", "Product SKU", "QTY", "Title", "productUrl"
+            ];
+
+            shopifyData.push(headers);
+
+            // Loop through WordPress products and map them to Shopify format
+            wpProducts.forEach(product => {
+                const row = [
+                    product.Kit_ItemID || "",  // Kit_ItemID
+                    product.main_Title || "",  // Title
+                    product.sku || "",  // Product SKU
+                    product.quantity || "",  // QTY
+                    product.title || "",  // Title
+                    product.productUrl || "",  // productUrl
+                ];
+
+                shopifyData.push(row);
+            });
+
+            // Use SheetJS to generate Excel file
+            const worksheet = XLSX.utils.aoa_to_sheet(shopifyData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Shopify Products");
+
+            // Export the Excel file
+            XLSX.writeFile(workbook, "shopify_import.xlsx");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>// Array of URLs you want to scrape
+        const urls = [
+            'https://pantone.com/color-finder/19-3908-TCX',
+            
+            // Add more URLs here
+        ];
+        
+        // Function to get data from the specified tag
+        async function getDataFromUrl(url) {
+            try {
+                // Fetch the content of the page
+                const response = await fetch(url);
+                const html = await response.text();
+        
+                // Parse the HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+        
+                // Get the data from the specific tag
+                const data = doc.querySelector('div.in-result h2 span span:nth-of-type(3)').innerText;
+        
+                // Output the result
+                console.log(`Data from ${url}: ${data}`);
+            } catch (error) {
+                console.error(`Error fetching data from ${url}:`, error);
+            }
+        }
+        
+        // Loop through the URLs and get data from each one
+        urls.forEach(url => getDataFromUrl(url));
+        </script>
+</body>
+</html>
