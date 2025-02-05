@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
-async function extractGoogleUrls(domain, numResults = 350) {
-    const query = `site:${"https://emmaonesock.com/"}`;
+async function extractGoogleUrls(domain, numResults = 301) {
+    const query = `site:${"https://roofvents.com/"}`;
     const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
     const urls = [];
 
@@ -16,7 +16,7 @@ async function extractGoogleUrls(domain, numResults = 350) {
         let resultsFetched = 0;
         while (resultsFetched < numResults) {
             // Wait for search results
-            await page.waitForSelector('div#search a');
+            await page.waitForSelector('div#search a', { timeout: 30000 });
 
             // Extract URLs
             const newUrls = await page.$$eval('div#search a', links =>

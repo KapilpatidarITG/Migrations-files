@@ -1,0 +1,62 @@
+body{
+    margin: 0px;
+}
+.Navbar {
+    display: flex;
+    width: 100%;
+}
+.Navbar1 ul{
+    display: flex;
+    gap: 15px;
+}
+.Navbar1 ul li{
+    list-style: none;
+}
+.Navbar1 ul li a{
+    text-decoration: none;
+    color: black;
+}
+.Navbar0 img{
+    width: 100%;
+    display: block;
+    max-width: 150px;
+}
+.Navbar0{
+    width: 20%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.Navbar2{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Navbar2 button{
+    padding: 10px;
+}
+.Navbar1{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bannerimage img{
+    width: 100%;
+    /* max-width: 100%; */
+    height: auto;
+    display:block;}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td{
+    text-align: center;
+    border: 2px,solid #ddd;
+    padding: 8px;
+}
+.text{
+    margin-top: 10%;
+    text-align: center;
+}

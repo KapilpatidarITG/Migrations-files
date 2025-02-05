@@ -5,60 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WordPress to Shopify Excel Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="star.css">
 </head>
 <body>
-    <h1>Generate Shopify Excel from WordPress Data</h1>
-    
-    <textarea id="wordpressData" rows="10" cols="80" placeholder="Paste your WordPress JSON product data here..."></textarea><br>
-    
-    <button onclick="generateShopifyExcel()">Generate Shopify Excel</button>
+    <div class="Announcement">
+        <p>Free shipping when you spend over $50</p>
+    </div>
 
-    <script>
-        // Function to convert WordPress JSON to Shopify Excel format
-        function generateShopifyExcel() {
-            // Get the input data from the textarea
-            const wordpressData = document.getElementById("wordpressData").value;
-            let wpProducts;
+<div class="navbar_ready">
+   <div class="navbar_1">
+    <ul>
+        <li><a href="https://eosfabrics.com/">Home</a></li>
+        <li><a href="https://eosfabrics.com/">How to Raise Bees</a></li>
+        <li><a href="https://eosfabrics.com/">Shop</a></li>
+        <li><a href="https://eosfabrics.com/">Programs</a></li>
+        <li><a href="https://eosfabrics.com/">Help Center</a></li>
+        <li><a href="https://eosfabrics.com/">Blog</a></li>
+    </ul>    
+   </div>
+    <div class="logo">
+    <img src="assets/image/logo.png" alt="">
+    </div>
+    <div class="navbar_2">
+        <ul>
+            <li><a href="https://eosfabrics.com/"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" x="0" y="0" viewBox="0 0 32 32" style="enable-background:new 0 0 512 512" xml:space="preserve" fill-rule="evenodd" class=""><g><circle cx="109" cy="61" r="10.956" fill="#41b4e6" transform="translate(-100.607 -50.304) scale(1.047)" opacity="1" data-original="#41b4e6" class=""></circle><path fill="#126099" d="M16.481 13.256a4.523 4.523 0 0 1 3.019 4.266v.002c0 .657-.26 1.286-.726 1.75a2.472 2.472 0 0 1-1.75.726h-6.948A2.472 2.472 0 0 1 7.6 17.524v-.002c0-1.97 1.26-3.647 3.019-4.266a4.001 4.001 0 0 1 2.931-6.72 4.001 4.001 0 0 1 2.931 6.72z" opacity="1" data-original="#126099"></path><path fill="#2b2d42" d="M20.871 22.285A11.422 11.422 0 0 1 13.465 25C7.137 25 2 19.863 2 13.535S7.137 2.069 13.465 2.069s11.466 5.138 11.466 11.466a11.42 11.42 0 0 1-2.652 7.33l7.428 7.428a1 1 0 0 1-1.414 1.414zm-.018-2.835a9.423 9.423 0 0 0 2.078-5.915c0-5.224-4.242-9.466-9.466-9.466S4 8.311 4 13.535 8.241 23 13.465 23a9.42 9.42 0 0 0 5.991-2.139c.513-.42.982-.894 1.397-1.411zm-4.372-6.194a4.522 4.522 0 0 1 3.019 4.266v.002A2.478 2.478 0 0 1 17.024 20h-6.948A2.478 2.478 0 0 1 7.6 17.524v-.002a4.522 4.522 0 0 1 3.019-4.266 4.001 4.001 0 0 1 2.931-6.721 4.001 4.001 0 0 1 2.931 6.721zM14.978 15h-2.856A2.522 2.522 0 0 0 9.6 17.522v.002c0 .126.05.247.139.337a.48.48 0 0 0 .337.139h6.948a.48.48 0 0 0 .337-.139.48.48 0 0 0 .139-.337v-.002A2.522 2.522 0 0 0 14.978 15zM13.55 8.535a2 2 0 1 0 .001 4.001 2 2 0 0 0-.001-4.001z" opacity="1" data-original="#2b2d42" class=""></path></g></svg> Search</a></li>
+            <li><a href="https://eosfabrics.com/">Accoutn</a></li>
+            <li><a href="https://eosfabrics.com/">Gift Certicate</a></li>
+            <li><a href="https://eosfabrics.com/">Carts</a></li>
+        </ul>       
+   </div>
+   </div>
+    <div class="banner_image">
+      <img src="assets/image/banner-image.jpg" alt="Banner image wow">
+    </div>
+    <div class="one">
 
-            try {
-                wpProducts = JSON.parse(wordpressData);  // Parse the WordPress JSON data
-            } catch (error) {
-                alert("Invalid JSON format!");
-                return;
-            }
-
-            // Create an array for the Shopify data
-            const shopifyData = [];
-
-            // Add header row for Shopify
-            const headers = [
-                "Kit_ItemID", "Title", "Product SKU", "QTY", "Title", "productUrl"
-            ];
-
-            shopifyData.push(headers);
-
-            // Loop through WordPress products and map them to Shopify format
-            wpProducts.forEach(product => {
-                const row = [
-                    product.Kit_ItemID || "",  // Kit_ItemID
-                    product.main_Title || "",  // Title
-                    product.sku || "",  // Product SKU
-                    product.quantity || "",  // QTY
-                    product.title || "",  // Title
-                    product.productUrl || "",  // productUrl
-                ];
-
-                shopifyData.push(row);
-            });
-
-            // Use SheetJS to generate Excel file
-            const worksheet = XLSX.utils.aoa_to_sheet(shopifyData);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Shopify Products");
-
-            // Export the Excel file
-            XLSX.writeFile(workbook, "shopify_import.xlsx");
-        }
-    </script>
+    </div>
 </body>
 </html>
