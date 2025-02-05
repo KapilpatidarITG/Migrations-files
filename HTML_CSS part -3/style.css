@@ -131,6 +131,11 @@ button a{
 }
 
 .reviews img {
-        max-width: 30%;
-        border-radius: 50%;
+    max-width: 100px;
+    border-radius: 100%;
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
