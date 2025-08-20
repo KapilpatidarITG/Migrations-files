@@ -1,0 +1,27 @@
+let allLinks = [];
+ 
+async function scrapePage(page) {
+    let url = `https://www.google.com/search?q=site:https://customhydronutrients.com&start=${(page - 1) * 10}`;
+    let res = await fetch(url, { credentials: "include" });
+    let html = await res.text();
+ 
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(html, "text/html");
+    let anchors = doc.querySelectorAll(".yuRUbf a");
+ 
+    anchors.forEach((a, index) => {
+        allLinks.push({
+            page,
+            index: index + 1,
+            url: a.href
+        });
+    });
+}
+ 
+(async () => {
+    for (let i = 1; i <= 31; i++) {
+        await scrapePage(i);
+    }
+    console.log("Total URLs:", allLinks.length);
+    console.log(JSON.stringify(allLinks, null, 2));
+})();
